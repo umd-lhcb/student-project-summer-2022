@@ -21,14 +21,31 @@
         };
         jupyterEnvironment = pkgs.jupyterlabWith {
           kernels = [ iPython ];
+          extraPackages = p: with p; [ root ];
         };
-      in rec
+      in
+      rec
       {
-        apps.jupyterlab = {
-          type = "app";
-          program = "${jupyterEnvironment}/bin/jupyter-lab";
-        };
-        defaultApp = apps.jupyterlab;
-        devShell = jupyterEnvironment.env;
+        devShell = jupyterEnvironment.env.overrideAttrs (oldAttrs: rec {
+          shellHook = oldAttrs.shellHook + ''
+            # Filter out tensorflow and zfit warnings
+            export TF_CPP_MIN_LOG_LEVEL=2
+            export ZFIT_DISABLE_TF_WARNINGS=1
+
+            # matplotlib gloabl config
+            export MPLBACKEND=agg  # the backend w/o a UI
+            export MPLCONFIGDIR=$(pwd)/.matplotlib
+
+            # Prompt
+            echo "This dev environment is prepared by nix."
+            echo "Type 'jupyter-lab' to continue"
+          '';
+
+          FONTCONFIG_FILE = pkgs.makeFontsConf {
+            fontDirectories = with pkgs; [
+              gyre-fonts
+            ];
+          };
+        });
       });
 }
