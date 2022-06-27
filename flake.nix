@@ -27,6 +27,8 @@
       rec
       {
         devShell = jupyterEnvironment.env.overrideAttrs (oldAttrs: rec {
+          name = "student-project-summer-2020";
+
           shellHook = oldAttrs.shellHook + ''
             # Filter out tensorflow and zfit warnings
             export TF_CPP_MIN_LOG_LEVEL=2
