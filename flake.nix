@@ -27,6 +27,7 @@
             numpy
             matplotlib
             uproot
+            jupyter
           ];
 
           FONTCONFIG_FILE = pkgs.makeFontsConf {
