@@ -18,6 +18,12 @@
           config = { allowUnfree = true; };
           overlays = [ self.overlay ] ++ nixpkgs.lib.attrValues jupyterWith.overlays;
         };
+
+        # Command line Python
+        python = pkgs.python3;
+        pythonPackages = python.pkgs;
+
+        # Jupyter
         iPython = pkgs.kernels.iPythonWith {
           name = "Python-env";
           packages = p: with p; [ numpy matplotlib uproot mplhep ];
@@ -30,6 +36,13 @@
       {
         devShell = jupyterEnvironment.env.overrideAttrs (oldAttrs: rec {
           name = "student-project-summer-2020";
+
+          buildInputs = oldAttrs.buildInputs ++ (with pythonPackages; [
+            numpy
+            matplotlib
+            uproot
+            mplhep
+          ]);
 
           shellHook = oldAttrs.shellHook + ''
             # Filter out tensorflow and zfit warnings
