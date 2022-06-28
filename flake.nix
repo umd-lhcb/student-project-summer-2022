@@ -24,7 +24,6 @@
           extraPackages = p: with p; [ root ];
         };
       in
-      rec
       {
         devShell = jupyterEnvironment.env.overrideAttrs (oldAttrs: rec {
           name = "student-project-summer-2020";
@@ -38,9 +37,13 @@
             export MPLBACKEND=agg  # the backend w/o a UI
             export MPLCONFIGDIR=$(pwd)/.matplotlib
 
+            # Unset Jupyter config dir
+            unset JUPYTER_CONFIG_DIR
+            # this is configured by ROOT and will cause problems
+
             # Prompt
             echo "This dev environment is prepared by nix."
-            echo "Type 'jupyter-lab' to continue"
+            echo "Type 'jupyter lab' to continue"
           '';
 
           FONTCONFIG_FILE = pkgs.makeFontsConf {
