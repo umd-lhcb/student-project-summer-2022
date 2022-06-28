@@ -35,7 +35,7 @@
       in
       {
         devShell = jupyterEnvironment.env.overrideAttrs (oldAttrs: rec {
-          name = "student-project-summer-2020";
+          name = "student-project-summer-2022";
 
           buildInputs = oldAttrs.buildInputs ++ (with pythonPackages; [
             numpy
