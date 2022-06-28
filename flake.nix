@@ -8,16 +8,19 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, jupyterWith, ... }:
+    {
+      overlay = import ./nix/overlay.nix;
+    } //
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
           config = { allowUnfree = true; };
-          overlays = nixpkgs.lib.attrValues jupyterWith.overlays;
+          overlays = [ self.overlay ] ++ nixpkgs.lib.attrValues jupyterWith.overlays;
         };
         iPython = pkgs.kernels.iPythonWith {
           name = "Python-env";
-          packages = p: with p; [ numpy matplotlib uproot ];
+          packages = p: with p; [ numpy matplotlib uproot mplhep ];
         };
         jupyterEnvironment = pkgs.jupyterlabWith {
           kernels = [ iPython ];
