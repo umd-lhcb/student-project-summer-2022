@@ -4,6 +4,8 @@ Project for 2022 summer high school students.
 
 ## Installation
 
+Make sure you have cloned the project via the `git` (SSH) protocol.
+
 ### Linux
 
 1. Install `nix`:
@@ -20,11 +22,12 @@ Project for 2022 summer high school students.
 
 3. In the project root directory, type `nix develop`
 
-    Wait until the process is finished. Now the Jupyter notebook can be launched via:
+    Wait until the process is finished.
 
 ### macOS and Microsoft Windows
 
-1. First, install `anaconda`
+1. Install `anaconda`
+
 2. Create an isolated environment and install dependencies:
 
     ```
@@ -40,7 +43,7 @@ Project for 2022 summer high school students.
 
 ## Usage
 
-Invoke `jupyter` with the following command
+Invoke `jupyter` with the following command:
 
 ```
 jupyter lab
