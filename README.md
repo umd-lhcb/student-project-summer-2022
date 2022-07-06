@@ -25,18 +25,13 @@ Project for 2022 summer high school students.
 ### macOS and Microsoft Windows
 
 1. First, install `anaconda`
-2. Create an isolated environment:
+2. Create an isolated environment and install dependencies:
 
     ```
-    conda create -n student-project-summer-2022
-    ```
-3. Install dependencies:
-
-    ```
-    conda install -n student-project-summer-2022 -c conda-forge numpy matplotlib uproot mplhep zfit
+    conda env create -f environment.yml
     ```
 
-4. Enter the specified conda environment:
+3. Enter the specified conda environment:
 
     ```
     conda activate student-project-summer-2022

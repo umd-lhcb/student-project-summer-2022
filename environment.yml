@@ -1,0 +1,10 @@
+name: student-project-summer-2022
+channels:
+    - conda-forge
+dependencies:
+    - numpy
+    - matplotlib
+    - uproot
+    - mplhep
+    - zfit
+    - jupyterlab
